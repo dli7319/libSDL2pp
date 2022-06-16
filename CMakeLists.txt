@@ -23,7 +23,9 @@ else()
 endif()
 
 # depends
-find_package(SDL2 REQUIRED)
+if(NOT TARGET SDL2::SDL2)
+  find_package(SDL2 REQUIRED)
+endif()
 set(SDL2_ALL_LIBRARIES SDL2::SDL2)
 set(SDL2_ALL_PKGCONFIG_MODULES sdl2)
 
