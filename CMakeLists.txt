@@ -22,11 +22,14 @@ else()
 	# please set SDL2PP_WITH_IMAGE, SDL2PP_WITH_TTF, SDL2PP_WITH_MIXER in parent project as needed
 endif()
 
-# depends
-if(NOT TARGET SDL2::SDL2)
+if(TARGET SDL2::SDL2)
+  set(SDL2_ALL_LIBRARIES SDL2::SDL2)
+elseif(TARGET SDL2::SDL2-static)
+  set(SDL2_ALL_LIBRARIES SDL2::SDL2-static)
+else()
   find_package(SDL2 REQUIRED)
+  set(SDL2_ALL_LIBRARIES SDL2::SDL2)
 endif()
-set(SDL2_ALL_LIBRARIES SDL2::SDL2)
 set(SDL2_ALL_PKGCONFIG_MODULES sdl2)
 
 if(TARGET SDL2::SDL2main)
